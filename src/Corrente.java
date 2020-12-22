@@ -1,7 +1,10 @@
-public class Corrente extends Conta{
+public class Corrente extends Conta implements Impostos{
+
+    private double Impostos;
 
     public void debito(double valor) {
 
+        IMPOSTOS();
         double cpmf = valor * 0.38 / 100;
 
         this.saldo = this.saldo - valor - cpmf;
@@ -15,4 +18,13 @@ public class Corrente extends Conta{
                 "\nSaldo: " + Double.toString(this.saldo) + "\n-------------\n";
     }
 
+    @Override
+    public double IMPOSTOS() {
+        return Impostos * 0.02;
+    }
+
+    @Override
+    public double IMPOSTOSCONTAPOUPANCA() {
+        return 0;
+    }
 }

@@ -1,4 +1,4 @@
-public class Poupanca extends Conta {
+public class Poupanca extends Conta implements Impostos {
 
     public void debito(double valor) {
 
@@ -13,4 +13,13 @@ public class Poupanca extends Conta {
                 "\nSaldo: " + Double.toString(this.saldo) + "\n-------------";
     }
 
+    @Override
+    public double IMPOSTOS() {
+        return 0;
+    }
+
+    @Override
+    public double IMPOSTOSCONTAPOUPANCA() {
+        return 0;
+    }
 }
