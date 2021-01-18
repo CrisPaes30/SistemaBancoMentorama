@@ -30,7 +30,7 @@ public abstract class Conta {
         this.saldo = saldoInicial;
 
         if(saldoInicial > 0){
-            movimentacoes.add(new Extrato(new Date(), "credito", saldoInicial));
+            movimentacoes.add(new Extrato(new Date(), "credito", saldoInicial,8000.00));
         }
     }
 

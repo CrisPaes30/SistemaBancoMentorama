@@ -1,7 +1,10 @@
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-public class git Utils {
+public class Utils{
+
 
     private List<Cliente> geradorClientes(){
         List<Cliente> lista = new ArrayList<>();
@@ -85,7 +88,11 @@ public class git Utils {
         if(contasCliente.getInvestimento() != null){
             System.out.println(contasCliente.getInvestimento().toString());
         }
+
     }
+
+
+
 
     public void imprimirSaldoGeralBanco(LinkedHashMap<String, Contas> listaClientes){
 
@@ -93,15 +100,16 @@ public class git Utils {
         double poupanca = 0;
         double investimento = 0;
         double salario = 0;
+        double compras = 0;
 
         for (Contas conta : listaClientes.values()) {
             corrente += conta.getCorrente() != null ? conta.getCorrente().saldo : 0;
             salario += conta.getSalario() != null ? conta.getSalario().saldo : 0;
             poupanca += conta.getPoupanca() != null ? conta.getPoupanca().saldo : 0;
             investimento += conta.getInvestimento() != null ? conta.getInvestimento().saldo : 0;
-        }
+                }
 
-        System.out.println("Saldo total banco: " + (corrente + salario + poupanca + investimento));
+        System.out.println("Saldo total banco: " + (corrente + salario + poupanca + investimento + compras));
     }
 
     public void Movimentacoes(Contas contasCliente){
@@ -125,23 +133,35 @@ public class git Utils {
             System.out.println("\n Movimentações conta investimento ->");
             toExtrato(contasCliente.getInvestimento().movimentacoes);
         }
+
     }
+
 
     public void toExtrato(List<Extrato> movimentacoes) {
 
-        System.out.println("\n |    Data    | Operação  |  Valor  | ");
+        System.out.println("\n | Data da Compra | Tipo da Conta | Compra Efetuada");
 
-        for (Extrato extrato : movimentacoes) {
-            System.out.println(" | " + new SimpleDateFormat("yyyy-MM-dd").format(extrato.getData()) +
-                    " | " + extrato.getTipoTransacao() +  "   |  "
-                     + extrato.getValor() + "  | ");
+        for (Extrato extrato : movimentacoes){
+            System.out.println(" | " + new SimpleDateFormat("yyyy-MM-dd").format(extrato.getData())  + "  | " + "   |  "
+                    + extrato.getCompras() +"  | "+ "     | " +
+                     + extrato.getValor());
         }
     }
-    
+
+
     private double gerarValorRandom(){
         var min = 30;
         var max = 1000;
         var x = (Math.random() * ((max - min) + 1)) + min;
         return Math.round(x);
     }
+
+    public void imprimirComprasCliente(){
+
+        double valorCompra;
+
+        Stream<Utils> comprasCiente = (Stream<Utils>) movimentacoes.stream()
+                .filter(compras -> getCompras()> 100).collect(Collectors.toList());
+    }
+
 }

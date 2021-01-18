@@ -1,4 +1,4 @@
-public class Cliente {
+public class Cliente{
 
     private String nome;
 
@@ -9,5 +9,8 @@ public class Cliente {
     public String getNome() {
         return nome;
     }
+
+
+
 
 }

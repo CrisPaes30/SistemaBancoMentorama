@@ -4,6 +4,7 @@ public class Contas {
     public Investimento investimento;
     public Salario salario;
 
+
     public Corrente getCorrente() {
         return corrente;
     }
@@ -35,4 +36,5 @@ public class Contas {
     public void setSalario(Salario salario) {
         this.salario = salario;
     }
+
 }

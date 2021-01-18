@@ -10,6 +10,7 @@ public class Principal {
 
         var listaClientes = utils.gerarClientes();
 
+
         MenuCliente menuCliente = new MenuCliente(listaClientes, scanner, utils);
 
         while (true){
@@ -33,9 +34,8 @@ public class Principal {
             if(opcao == 2){
                 menuCliente.Menu();
             }
+
         }
-
-
 
     }
 
