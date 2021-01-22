@@ -1,4 +1,5 @@
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Scanner;
 
 public class MenuCliente {
@@ -6,6 +7,7 @@ public class MenuCliente {
     private LinkedHashMap<String, Contas> listaClientes;
     private Scanner scanner;
     private Utils utils;
+    private Object Compras;
 
     public MenuCliente(LinkedHashMap<String, Contas> listaClientes, Scanner scanner, Utils utils){
         this.listaClientes = listaClientes;
@@ -76,11 +78,13 @@ public class MenuCliente {
 
             System.out.println(" 1 - Resumo contas");
             System.out.println(" 2 - Movimentações");
-            System.out.println(" 3 - Voltar ao menu anterior");
+            System.out.println(" 3 - Total de compras");
+            System.out.println(" 4 - Voltar ao menu anterior");
+
 
             int opcao = scanner.nextInt();
 
-            if(opcao == 3){
+            if(opcao == 4){
                 voltaMenu = true;
                 break;
             }
@@ -92,6 +96,9 @@ public class MenuCliente {
             if(opcao == 2){
                 utils.Movimentacoes(cliente);
             }
+//            if(opcao == 3){
+//                utils.imprimirComprasPorClientes((List<Extrato>) cliente);
+//            }
         }
 
         return voltaMenu;

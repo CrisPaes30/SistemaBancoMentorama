@@ -3,6 +3,15 @@ public class Contas {
     public Poupanca poupanca;
     public Investimento investimento;
     public Salario salario;
+    public Compras compras;
+
+
+    public Contas() {
+        this.corrente = corrente;
+        this.poupanca = poupanca;
+        this.investimento = investimento;
+        this.salario = salario;
+    }
 
     public Corrente getCorrente() {
         return corrente;
@@ -24,7 +33,7 @@ public class Contas {
         return investimento;
     }
 
-    public void setInvestimento(Investimento investimento) {
+   public void setInvestimento(Investimento investimento) {
         this.investimento = investimento;
     }
 
@@ -34,5 +43,13 @@ public class Contas {
 
     public void setSalario(Salario salario) {
         this.salario = salario;
+    }
+
+    public Compras getCompras() {
+        return compras;
+    }
+
+    public void setCompras(Compras compras) {
+        this.compras = compras;
     }
 }
