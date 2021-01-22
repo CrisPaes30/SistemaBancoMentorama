@@ -8,23 +8,15 @@ public class MenuCliente {
     private LinkedHashMap<String, Contas> listaClientes;
     private Scanner scanner;
     private Utils utils;
-    private Compras compras;
 
-    public MenuCliente(LinkedHashMap<String, Contas> listaClientes, Scanner scanner, Utils utils,
-                       Compras compras){
+
+    public MenuCliente(LinkedHashMap<String, Contas> listaClientes, Scanner scanner, Utils utils){
         this.listaClientes = listaClientes;
         this.scanner = scanner;
         this.utils = utils;
-       // this.compras = compras;
+
     }
 
-
-
-    public MenuCliente(LinkedHashMap<String,Contas> listaClientes, Scanner scanner, Utils utils) {
-        this.listaClientes = listaClientes;
-        this.scanner = scanner;
-        this.utils = utils;
-    }
 
 
     public void Menu(){
@@ -51,8 +43,10 @@ public class MenuCliente {
                 DadosCliente();
             }
             if(opcao == 3){
-                compras.filtros((List<Compras>) compras);
+                utils.RankingMaiorValorCompra(listaClientes);
             }
+
+
         }
     }
 
