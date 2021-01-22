@@ -1,8 +1,9 @@
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class  Utils {
-
 
     private List<Cliente> geradorClientes() {
         List<Cliente> lista = new ArrayList<>();
@@ -11,6 +12,16 @@ public class  Utils {
         lista.add(new Cliente("Pedro"));
         lista.add(new Cliente("Maria"));
         lista.add(new Cliente("Julia"));
+        lista.add(new Cliente("Antonio"));
+        lista.add(new Cliente("Marcus"));
+        lista.add(new Cliente("Vander"));
+        lista.add(new Cliente("Thiago"));
+        lista.add(new Cliente("Mateus"));
+        lista.add(new Cliente("Roberto"));
+        lista.add(new Cliente("Antoni"));
+        lista.add(new Cliente("Gustavo"));
+        lista.add(new Cliente("Carlos"));
+
 
         return lista;
     }
@@ -28,6 +39,10 @@ public class  Utils {
 
                 var corrente = new Corrente();
                 corrente.criarConta(cliente, gerarValorRandom());
+                corrente.movimentacoes.add(new Extrato(new Date(), "CompraMercado", gerarValorRandom()));
+                corrente.movimentacoes.add(new Extrato(new Date(), "CompraSalao", gerarValorRandom()));
+                corrente.movimentacoes.add(new Extrato(new Date(), "ComprarBar", gerarValorRandom()));
+
 
                 var poupanca = new Poupanca();
                 poupanca.criarConta(cliente, gerarValorRandom());
@@ -69,7 +84,7 @@ public class  Utils {
         }
     }
 
-    public void imprimirComprasPorClientes(LinkedHashMap<String, Contas> listaClientes, Compras compras) {
+    public void imprimirComprasPorClientes(LinkedHashMap<String, Contas> listaClientes) {
 
         for (String key : listaClientes.keySet()) {
             System.out.println("Nome" + key);
@@ -94,10 +109,6 @@ public class  Utils {
         if (contasCliente.getInvestimento() != null) {
             System.out.println(contasCliente.getInvestimento().toString());
         }
-        if (contasCliente.getCompras() != null) {
-            System.out.println(contasCliente.getCompras().toString());
-        }
-
     }
 
     public void imprimirSaldoGeralBanco(LinkedHashMap<String, Contas> listaClientes) {
@@ -106,15 +117,14 @@ public class  Utils {
         double poupanca = 0;
         double investimento = 0;
         double salario = 0;
-        double compras = 0;
+
 
         for (Contas conta : listaClientes.values()) {
             corrente += conta.getCorrente() != null ? conta.getCorrente().saldo : 0;
             salario += conta.getSalario() != null ? conta.getSalario().saldo : 0;
             poupanca += conta.getPoupanca() != null ? conta.getPoupanca().saldo : 0;
             investimento += conta.getInvestimento() != null ? conta.getInvestimento().saldo : 0;
-            compras += conta.getCompras() != null ? conta.getCompras().saldo : 0;
-        }
+              }
 
         System.out.println("Saldo total banco: " + (corrente + salario + poupanca + investimento));
     }
@@ -140,10 +150,18 @@ public class  Utils {
             System.out.println("\n Movimentações conta investimento ->");
             toExtrato(contasCliente.getInvestimento().movimentacoes);
         }
-//        if (contasCliente.getCompras() != null) {
-//            System.out.println("\n Compras cliente ->");
-//            toExtrato(contasCliente.getCompras().movimentacoes);
-//        }
+
+
+    }
+
+
+    public void RankingMaiorValorCompra(LinkedHashMap<String, Contas> listaClientes){
+
+        String nomeCliente ="";
+        double valor = 0;
+
+        Stream<Contas> stream = listaClientes.values().stream().filter(contas -> contas.corrente.saldo > 1000);
+        stream.forEach(System.out::println);
 
     }
 
@@ -155,24 +173,19 @@ public class  Utils {
         for (Extrato extrato : movimentacoes) {
             System.out.println(" | " + new SimpleDateFormat("yyyy-MM-dd").format(extrato.getData()) +
                     " | " + extrato.getTipoTransacao() + "   |  "
-                    + extrato.getValor() + "  | ");
+                          + extrato.getValor() + "  | ");
         }
     }
 
-    private double gerarValorRandom() {
+
+    private double gerarValorRandom(){
+
         var min = 30;
         var max = 1000;
         var x = (Math.random() * ((max - min) + 1)) + min;
         return Math.round(x);
     }
 
-//    public void imprimirComprasPorClientes(List<Extrato> compras) {
-//        System.out.println("\n |    Data da Compra    | Forma de Pagamento |  Valor  | ");
-//
-//        for (Extrato extrato : compras) {
-//            System.out.println(" | " + new SimpleDateFormat("yyyy-MM-dd").format(extrato.getData()) +
-//                    " | " + extrato.getTipoTransacao() + "   |  "
-//                    + extrato.getValor() + "  | ");
-//        }
-//    }
 }
+
+

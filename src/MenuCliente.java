@@ -1,19 +1,23 @@
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 public class MenuCliente {
 
     private LinkedHashMap<String, Contas> listaClientes;
     private Scanner scanner;
     private Utils utils;
-    private Object Compras;
+
 
     public MenuCliente(LinkedHashMap<String, Contas> listaClientes, Scanner scanner, Utils utils){
         this.listaClientes = listaClientes;
         this.scanner = scanner;
         this.utils = utils;
+
     }
+
+
 
     public void Menu(){
 
@@ -22,11 +26,12 @@ public class MenuCliente {
 
             System.out.println(" 1 - Listar clientes do banco");
             System.out.println(" 2 - Acessar dados do cliente");
-            System.out.println(" 3 - Voltar ao menu principal");
+            System.out.println(" 3 - Extrato compras");
+            System.out.println(" 4 - Voltar ao menu principal");
 
             int opcao = scanner.nextInt();
 
-            if(opcao == 3){
+            if(opcao == 4){
                 break;
             }
 
@@ -37,6 +42,10 @@ public class MenuCliente {
             if(opcao == 2){
                 DadosCliente();
             }
+            if(opcao == 3){
+                utils.RankingMaiorValorCompra(listaClientes);
+            }
+
         }
     }
 
@@ -69,14 +78,15 @@ public class MenuCliente {
         }
     }
 
-    private boolean Contas(Contas cliente){
+    private boolean Contas(Contas cliente) {
 
         boolean voltaMenu = false;
 
-        while (true){
+        while (true) {
             System.out.println("\n Escolha uma das opções abaixo: ");
 
             System.out.println(" 1 - Resumo contas");
+
             System.out.println(" 2 - Movimentações");
             System.out.println(" 3 - Total de compras");
             System.out.println(" 4 - Voltar ao menu anterior");
@@ -84,24 +94,20 @@ public class MenuCliente {
 
             int opcao = scanner.nextInt();
 
-            if(opcao == 4){
+            if (opcao == 4) {
                 voltaMenu = true;
                 break;
             }
 
-            if(opcao == 1){
+            if (opcao == 1) {
                 utils.imprimirDadosContasPorCliente(cliente);
             }
 
-            if(opcao == 2){
+            if (opcao == 2) {
                 utils.Movimentacoes(cliente);
             }
-//            if(opcao == 3){
-//                utils.imprimirComprasPorClientes((List<Extrato>) cliente);
-//            }
-        }
 
+        }
         return voltaMenu;
     }
-
 }
