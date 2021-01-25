@@ -1,4 +1,4 @@
-import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Scanner;
 
 public class Principal {
@@ -8,10 +8,12 @@ public class Principal {
         Utils utils = new Utils();
         Scanner scanner = new Scanner(System.in);
 
+
         var listaClientes = utils.gerarClientes();
+        var listaCompras= utils.RankingMaiorValorCompra();
 
 
-        MenuCliente menuCliente = new MenuCliente(listaClientes, scanner, utils);
+        MenuCliente menuCliente = new MenuCliente(listaClientes,listaCompras, scanner,utils);
 
         while (true){
             System.out.println("\n Escolha uma das opções abaixo: ");

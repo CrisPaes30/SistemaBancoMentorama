@@ -1,47 +1,43 @@
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Utils {
 
-    private List<Cliente> geradorClientes(){
-        List<Cliente> lista = new ArrayList<>();
 
-        lista.add(new Cliente("João"));
-        lista.add(new Cliente("Pedro"));
-        lista.add(new Cliente("Maria"));
-        lista.add(new Cliente("Julia"));
-        lista.add(new Cliente("Antonio"));
-        lista.add(new Cliente("Marcus"));
-        lista.add(new Cliente("Vander"));
-        lista.add(new Cliente("Thiago"));
-        lista.add(new Cliente("Mateus"));
-        lista.add(new Cliente("Roberto"));
-        lista.add(new Cliente("Antoni"));
-        lista.add(new Cliente("Gustavo"));
-        lista.add(new Cliente("Carlos"));
+    private static List<Cliente> geradorClientes() {
+        return List.of(
+                new Cliente("João", "MERCADO", 1100.00),
+                new Cliente("Pedro", "ESCOLA", 850.65),
+                new Cliente("Maria", "FEIRA", 153.55),
+                new Cliente("Julia", "CARRO", 755.55),
+                new Cliente("Antonio", "MERCADO", 23.25),
+                new Cliente("Marcus", "LOJA", 100.00),
+                new Cliente("Vander", "VIAGEM", 9255.22),
+                new Cliente("Thiago", "VIAGEM", 1599.22),
+                new Cliente("Mateus", "MERCADO", 15.22),
+                new Cliente("Roberto", "FEIRA", 10.00),
+                new Cliente("Antoni", "CURSO", 322.15),
+                new Cliente("Gustavo", "ESCOLA", 165.25),
+                new Cliente("Carlos", "MERCADO", 100.00)
+        );
 
 
-        return lista;
     }
 
-    private LinkedHashMap<String, Contas> geradorContasClientes(List<Cliente> listaClientes){
+    private LinkedHashMap<String, Contas> geradorContasClientes(List<Cliente> listaClientes) {
         LinkedHashMap<String, Contas> listaContas = new LinkedHashMap<>();
 
         var count = 1;
 
-        for (Cliente cliente : listaClientes ) {
+        for (Cliente cliente : listaClientes) {
 
             var contas = new Contas();
 
-            if(count % 2 == 0){
+            if (count % 2 == 0) {
 
                 var corrente = new Corrente();
                 corrente.criarConta(cliente, gerarValorRandom());
-                corrente.movimentacoes.add(new Extrato(new Date(), "CompraMercado", gerarValorRandom()));
-                corrente.movimentacoes.add(new Extrato(new Date(), "CompraSalao", gerarValorRandom()));
-                corrente.movimentacoes.add(new Extrato(new Date(), "ComprarBar", gerarValorRandom()));
 
 
                 var poupanca = new Poupanca();
@@ -49,7 +45,7 @@ public class Utils {
 
                 contas.setCorrente(corrente);
                 contas.setPoupanca(poupanca);
-            }else {
+            } else {
 
                 var salario = new Salario();
                 salario.criarConta(cliente, gerarValorRandom());
@@ -57,13 +53,13 @@ public class Utils {
                 contas.setSalario(salario);
             }
 
-            if(count == 2) {
+            if (count == 2) {
                 var investimento = new Investimento();
                 investimento.criarConta(cliente, gerarValorRandom());
                 contas.setInvestimento(investimento);
             }
 
-            listaContas.put(cliente.getNome(), contas);
+            listaContas.put(String.valueOf(cliente), contas);
 
             count++;
         }
@@ -71,12 +67,12 @@ public class Utils {
         return listaContas;
     }
 
-    public LinkedHashMap<String, Contas> gerarClientes(){
+    public LinkedHashMap<String, Contas> gerarClientes() {
         var listaClientes = geradorClientes();
         return geradorContasClientes(listaClientes);
     }
 
-    public void imprimirListaClientes(LinkedHashMap<String, Contas> listaClientes){
+    public void imprimirListaClientes(LinkedHashMap<String, Contas> listaClientes) {
         System.out.println("Lista de Clientes: \n");
 
         for (String key : listaClientes.keySet()) {
@@ -84,26 +80,26 @@ public class Utils {
         }
     }
 
-    public void imprimirDadosContasPorCliente(Contas contasCliente){
+    public void imprimirDadosContasPorCliente(Contas contasCliente) {
 
-        if(contasCliente.getCorrente() != null){
+        if (contasCliente.getCorrente() != null) {
             System.out.println(contasCliente.getCorrente().toString());
         }
 
-        if(contasCliente.getSalario() != null){
+        if (contasCliente.getSalario() != null) {
             System.out.println(contasCliente.getSalario().toString());
         }
 
-        if(contasCliente.getPoupanca() != null){
+        if (contasCliente.getPoupanca() != null) {
             System.out.println(contasCliente.getPoupanca().toString());
         }
 
-        if(contasCliente.getInvestimento() != null){
+        if (contasCliente.getInvestimento() != null) {
             System.out.println(contasCliente.getInvestimento().toString());
         }
     }
 
-    public void imprimirSaldoGeralBanco(LinkedHashMap<String, Contas> listaClientes){
+    public void imprimirSaldoGeralBanco(LinkedHashMap<String, Contas> listaClientes) {
 
         double corrente = 0;
         double poupanca = 0;
@@ -120,37 +116,40 @@ public class Utils {
         System.out.println("Saldo total banco: " + (corrente + salario + poupanca + investimento));
     }
 
-    public void Movimentacoes(Contas contasCliente){
+    public void Movimentacoes(Contas contasCliente) {
 
-        if(contasCliente.getCorrente() != null){
+        if (contasCliente.getCorrente() != null) {
             System.out.println("\n Movimentações conta corrente ->");
             toExtrato(contasCliente.getCorrente().movimentacoes);
         }
 
-        if(contasCliente.getSalario() != null){
+        if (contasCliente.getSalario() != null) {
             System.out.println("\n Movimentações conta salario ->");
             toExtrato(contasCliente.getSalario().movimentacoes);
         }
 
-        if(contasCliente.getPoupanca() != null){
+        if (contasCliente.getPoupanca() != null) {
             System.out.println("\n Movimentações conta poupanca ->");
             toExtrato(contasCliente.getPoupanca().movimentacoes);
         }
 
-        if(contasCliente.getInvestimento() != null){
+        if (contasCliente.getInvestimento() != null) {
             System.out.println("\n Movimentações conta investimento ->");
             toExtrato(contasCliente.getInvestimento().movimentacoes);
         }
     }
 
-    public void RankingMaiorValorCompra(LinkedHashMap<String, Contas> listaClientes){
 
-        String nomeCliente ="";
-        double valor = 0;
+    public LinkedHashMap<String, Cliente> RankingMaiorValorCompra(LinkedHashMap<String, Cliente> listaCompras) {
+        System.out.println("Maiores Compras dos Clientes");
 
-        Stream<Contas> stream = listaClientes.values().stream().filter(contas -> contas.corrente.saldo > 1000);
-        stream.forEach(System.out::println);
-
+        for(Cliente cliente : geradorClientes()) {
+            geradorClientes().stream()
+                    .limit(3)
+                    .filter(x -> cliente.getValorDaCompra()>1000)
+                    .collect(Collectors.toList()).forEach(System.out::println);
+        }
+       return listaCompras;
     }
 
     public void toExtrato(List<Extrato> movimentacoes) {
@@ -159,15 +158,17 @@ public class Utils {
 
         for (Extrato extrato : movimentacoes) {
             System.out.println(" | " + new SimpleDateFormat("yyyy-MM-dd").format(extrato.getData()) +
-                    " | " + extrato.getTipoTransacao() +  "   |  "
+                    " | " + extrato.getTipoTransacao() + "   |  "
                     + extrato.getValor() + "  | ");
         }
     }
 
-    private double gerarValorRandom(){
+    private double gerarValorRandom() {
         var min = 30;
         var max = 1000;
         var x = (Math.random() * ((max - min) + 1)) + min;
         return Math.round(x);
     }
+
+
 }

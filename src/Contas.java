@@ -1,3 +1,9 @@
+import java.util.Comparator;
+import java.util.function.Function;
+import java.util.function.ToDoubleFunction;
+import java.util.function.ToIntFunction;
+import java.util.function.ToLongFunction;
+
 public class Contas {
     public Corrente corrente;
     public Poupanca poupanca;
@@ -36,5 +42,6 @@ public class Contas {
     public void setSalario(Salario salario) {
         this.salario = salario;
     }
+
 
 }

@@ -1,22 +1,34 @@
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Scanner;
-import java.util.stream.Stream;
+import java.util.*;
 
 public class MenuCliente {
 
     private LinkedHashMap<String, Contas> listaClientes;
+    private LinkedHashMap<String, Cliente> listaCompras;
     private Scanner scanner;
     private Utils utils;
 
 
-    public MenuCliente(LinkedHashMap<String, Contas> listaClientes, Scanner scanner, Utils utils){
+//    public MenuCliente(LinkedHashMap<String, Contas> listaClientes, Scanner scanner, Utils utils,
+//    LinkedHashMap<String, Cliente> listaCompras){
+//        this.listaClientes = listaClientes;
+//        this.listaCompras = listaCompras;
+//        this.scanner = scanner;
+//        this.utils = utils;
+//
+//    }
+//
+//    public MenuCliente(LinkedHashMap<String,Contas> listaClientes, Scanner scanner, Utils utils) {
+//        this.listaClientes = listaClientes;
+//        this.scanner = scanner;
+//        this.utils = utils;
+//    }
+
+    public MenuCliente(LinkedHashMap<String,Contas> listaClientes, LinkedHashMap<String, Cliente> listaCompras, Scanner scanner, Utils utils) {
         this.listaClientes = listaClientes;
+        this.listaCompras = listaCompras;
         this.scanner = scanner;
         this.utils = utils;
-
     }
-
 
 
     public void Menu(){
@@ -43,7 +55,7 @@ public class MenuCliente {
                 DadosCliente();
             }
             if(opcao == 3){
-                utils.RankingMaiorValorCompra(listaClientes);
+                utils.RankingMaiorValorCompra(listaCompras);
             }
 
 
