@@ -3,29 +3,12 @@ import java.util.*;
 public class MenuCliente {
 
     private LinkedHashMap<String, Contas> listaClientes;
-    private LinkedHashMap<String, Cliente> listaCompras;
     private Scanner scanner;
     private Utils utils;
 
 
-//    public MenuCliente(LinkedHashMap<String, Contas> listaClientes, Scanner scanner, Utils utils,
-//    LinkedHashMap<String, Cliente> listaCompras){
-//        this.listaClientes = listaClientes;
-//        this.listaCompras = listaCompras;
-//        this.scanner = scanner;
-//        this.utils = utils;
-//
-//    }
-//
-//    public MenuCliente(LinkedHashMap<String,Contas> listaClientes, Scanner scanner, Utils utils) {
-//        this.listaClientes = listaClientes;
-//        this.scanner = scanner;
-//        this.utils = utils;
-//    }
-
-    public MenuCliente(LinkedHashMap<String,Contas> listaClientes, LinkedHashMap<String, Cliente> listaCompras, Scanner scanner, Utils utils) {
+    public MenuCliente(LinkedHashMap<String,Contas> listaClientes, Scanner scanner, Utils utils) {
         this.listaClientes = listaClientes;
-        this.listaCompras = listaCompras;
         this.scanner = scanner;
         this.utils = utils;
     }
@@ -55,9 +38,8 @@ public class MenuCliente {
                 DadosCliente();
             }
             if(opcao == 3){
-                utils.RankingMaiorValorCompra(listaCompras);
+                utils.RankingMaiorValorCompra(listaClientes);
             }
-
 
         }
     }
@@ -91,37 +73,36 @@ public class MenuCliente {
         }
     }
 
-    private boolean Contas(Contas cliente){
+    private boolean Contas(Contas cliente) {
 
         boolean voltaMenu = false;
 
-        while (true){
+        while (true) {
             System.out.println("\n Escolha uma das opções abaixo: ");
 
             System.out.println(" 1 - Resumo contas");
-            System.out.println(" 2 - Compras do Cliente");
-            System.out.println(" 3 - Maior gastos clientes");
+
+            System.out.println(" 2 - Movimentações");
+            System.out.println(" 3 - Total de compras");
             System.out.println(" 4 - Voltar ao menu anterior");
+
 
             int opcao = scanner.nextInt();
 
-            if(opcao == 4){
+            if (opcao == 4) {
                 voltaMenu = true;
                 break;
             }
 
-            if(opcao == 1){
+            if (opcao == 1) {
                 utils.imprimirDadosContasPorCliente(cliente);
             }
 
-            if(opcao == 2){
+            if (opcao == 2) {
                 utils.Movimentacoes(cliente);
             }
 
-
         }
-
         return voltaMenu;
     }
-
 }

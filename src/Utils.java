@@ -1,6 +1,8 @@
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.DoubleStream;
+import java.util.stream.Stream;
 
 public class Utils {
 
@@ -140,16 +142,38 @@ public class Utils {
     }
 
 
-    public LinkedHashMap<String, Cliente> RankingMaiorValorCompra(LinkedHashMap<String, Cliente> listaCompras) {
+    public void RankingMaiorValorCompra(LinkedHashMap<String, Contas> listaCompras) {
         System.out.println("Maiores Compras dos Clientes");
 
-        for(Cliente cliente : geradorClientes()) {
-            geradorClientes().stream()
-                    .limit(3)
-                    .filter(x -> cliente.getValorDaCompra()>1000)
-                    .collect(Collectors.toList()).forEach(System.out::println);
-        }
-       return listaCompras;
+
+        geradorClientes().stream()
+                .filter(cliente -> cliente.getValorDaCompra() > 1000.00)
+                .limit(3)
+                .sorted(Comparator.comparing(Cliente::getNome))
+                .collect(Collectors.toList())
+                .forEach(x -> System.out.println("Cliente Valor: "
+                        + x.getNome() + " " + "R$" + x.getValorDaCompra()));
+
+        System.out.println(" ");
+        System.out.println("Menores Compras dos Clientes");
+        System.out.println(" ");
+
+        geradorClientes().stream()
+                .filter(cliente -> cliente.getValorDaCompra() < 300.00)
+                .limit(3)
+                .sorted(Comparator.comparing(Cliente::getNome))
+                .collect(Collectors.toList())
+                .forEach(x -> System.out.println("Cliente Valor: "
+                        + x.getNome() + " " + "R$" + x.getValorDaCompra()));
+        System.out.println(" ");
+
+        System.out.println(" ");
+        System.out.println("Media De Compras");
+        System.out.println(" ");
+
+        geradorClientes().stream().mapToDouble(Cliente::getValorDaCompra).average()
+                .stream().forEach(x -> System.out.printf("%.2f", +x).println(" Media de Compras "));
+
     }
 
     public void toExtrato(List<Extrato> movimentacoes) {

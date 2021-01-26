@@ -10,6 +10,13 @@ public class Contas {
     public Investimento investimento;
     public Salario salario;
 
+    public Contas() {
+        this.corrente = corrente;
+        this.poupanca = poupanca;
+        this.investimento = investimento;
+        this.salario = salario;
+    }
+
 
     public Corrente getCorrente() {
         return corrente;
@@ -45,3 +52,4 @@ public class Contas {
 
 
 }
+

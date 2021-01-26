@@ -10,7 +10,7 @@ public abstract class Conta {
     protected double saldo;
     protected Cliente cliente;
     protected List<Extrato> movimentacoes;
-
+    public List<Extrato> compras;
 
     public Conta() {
         this.numero = 0;
@@ -18,6 +18,8 @@ public abstract class Conta {
         this.saldo = 0;
         this.cliente = null;
         this.movimentacoes = new ArrayList<>();
+        this.compras =new ArrayList<>();
+
     }
 
     public void criarConta(Cliente cliente, double saldoInicial) {
@@ -31,6 +33,7 @@ public abstract class Conta {
 
         if(saldoInicial > 0){
             movimentacoes.add(new Extrato(new Date(), "credito", saldoInicial));
+            //compras.add(new Extrato(new Date(), "debito", saldoInicial));
         }
     }
 
